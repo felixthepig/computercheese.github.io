@@ -1,0 +1,535 @@
+<style>
+.linux{ background-color:#FFFFFF; overflow:auto;width:auto;border:solid #3366CC;border-width:.1em .1em .1em .8em;padding:.2em .9em; font-family: Courier New, Courier, monospace;color: #e06666}
+.dos{ background-color:#FFFFFF; overflow:auto;width:auto;border:solid #CC6633;border-width:.1em .1em .1em .8em;padding:.2em .9em; font-family: Courier New, Courier, monospace;color: #e06666}
+.util{ background-color:#FFFFFF; overflow:auto;width:auto;border:solid #6633CC;border-width:.1em .1em .1em .8em;padding:.2em .9em; font-family: Courier New, Courier, monospace;color: #e06666}
+.freeipmi{ background-color:#FFFFFF; overflow:auto;width:auto;border:solid #66CC33;border-width:.1em .1em .1em .8em;padding:.2em .9em; font-family: Courier New, Courier, monospace;color: #e06666}
+</style>
+
+<b>Get Device ID</b> - NetFn = App (0x06h), CMD = 0x01h, Privilege Level = User<br />
+[IPMI tools in Linux]<br />
+[IPMItool]<br />
+<span style="color: blue;">ipmitool raw 0x06 0x01</span><br />
+<span style="color: blue;">ipmitool mc</span><br />
+<span style="color: blue;">ipmitool mc info</span><br />
+[ipmiutil]<br />
+<span style="color: blue;">ipmiutil cmd 00 20 18 01</span><br />
+<span style="color: blue;">icmd 00 20 18 01</span><br />
+<span style="color: blue;">ipmiutil health</span><br />
+[FreeIPMI]<br />
+<span style="color: blue;">ipmi-raw 0x00 0x06 0x01</span><br />
+<span style="color: blue;">bmc-info</span><br />
+<span style="color: blue;">bmc-info&nbsp;--get-device-id</span><br />
+[IPMI tools under DOS]<br />
+<span style="color: blue;">ipmitool 20 18 01</span><br />
+[ipmiutil]<br />
+<span style="color: blue;">ipmiutil cmd 00 20 18 01</span><br />
+<span style="color: blue;">icmd 00 20 18 01</span><br />
+<br />
+<span style="font-family: inherit;">For example</span><br />
+[IPMItool in Linux]<br />
+<div class="linux">
+<span style="font-family: inherit;"><b>$&nbsp;</b><b>ipmitool raw 0x06 0x01</b></span><br />
+<span style="font-family: inherit;">&nbsp;20 01 00 09 02 bf 83 23 00 00 00 00 00 00 00</span><br />
+<span style="font-family: inherit;"><b>$&nbsp;</b><b>ipmitool mc info</b></span><br />
+<span style="font-family: inherit;">Device ID &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : 0</span><br />
+<span style="font-family: inherit;">Device Revision &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : 0</span><br />
+<span style="font-family: inherit;">Firmware Revision &nbsp; &nbsp; &nbsp; &nbsp; : 1.02</span><br />
+<span style="font-family: inherit;">IPMI Version &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: 2.0</span><br />
+<span style="font-family: inherit;">Manufacturer ID &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : 262145</span><br />
+<span style="font-family: inherit;">Manufacturer Name &nbsp; &nbsp; &nbsp; &nbsp; : Unknown (0x01)</span><br />
+<span style="font-family: inherit;">Product ID &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: 0 (0x0000)</span><br />
+<span style="font-family: inherit;">Product Name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: Unknown (0x0)</span><br />
+<span style="font-family: inherit;">Device Available &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: yes</span><br />
+<span style="font-family: inherit;">Provides Device SDRs &nbsp; &nbsp; &nbsp;: no</span><br />
+<span style="font-family: inherit;">Additional Device Support :</span><br />
+<span style="font-family: inherit;">&nbsp; &nbsp; Sensor Device</span><br />
+<span style="font-family: inherit;">&nbsp; &nbsp; SDR Repository Device</span><br />
+<span style="font-family: inherit;">&nbsp; &nbsp; SEL Device</span><br />
+<span style="font-family: inherit;">&nbsp; &nbsp; FRU Inventory Device</span><br />
+<span style="font-family: inherit;">Aux Firmware Rev Info &nbsp; &nbsp; :&nbsp;</span><br />
+<span style="font-family: inherit;">&nbsp; &nbsp; 0xb9</span><br />
+<span style="font-family: inherit;">&nbsp; &nbsp; 0x0c</span><br />
+<span style="font-family: inherit;">&nbsp; &nbsp; 0x00</span><br />
+<span style="font-family: inherit;">&nbsp; &nbsp; 0x00</span></div>
+[IPMItool under DOS]<br />
+<div class="dos">
+<b><span style="font-family: inherit;">C:\&gt; ipmitool 20 18 01</span></b><br />
+<span style="font-family: inherit;">20 1C 01 00 20 01 00 10 02 BF 83 23 00 00 00 00 00 00 00</span></div>
+[IPMIutil in Linux]<br />
+<div class="util">
+<b>$ ipmiutil cmd 00 20 18 01</b><br />
+<b>$ icmd 00 20 18 01</b><br />
+ipmiutil ver 2.94<br />
+icmd ver 2.94<br />
+This is a test tool to compose IPMI commands.<br />
+Do not use without knowledge of the IPMI specification.<br />
+-- BMC version 1.6, IPMI version 2.0<br />
+respData[len=15]: 20 01 00 09 02 bf 83 23 00 00 00 00 00 00 00<br />
+send_icmd ret = 0<br />
+ipmiutil cmd, completed successfully<br />
+<b>$ ipmiutil health</b><br />
+ipmiutil ver 2.94<br />
+ihealth ver 2.94<br />
+BMC manufacturer &nbsp;= 002383 ( ), product = 0009<br />
+BMC version &nbsp; &nbsp; &nbsp; = 1.01, IPMI v2.0<br />
+IPMI driver type &nbsp;= 6 &nbsp; &nbsp; &nbsp; &nbsp;(lan)<br />
+Power State &nbsp; &nbsp; &nbsp; = 05 &nbsp; &nbsp; &nbsp; (S5: soft off)<br />
+Selftest status &nbsp; = 0055 &nbsp; &nbsp; (OK)<br />
+Chassis Status &nbsp; &nbsp;= 40 01 40 00 (off, see below)<br />
+<span class="Apple-tab-span" style="white-space: pre;"> </span>chassis_power &nbsp; &nbsp; &nbsp; = off<br />
+<span class="Apple-tab-span" style="white-space: pre;"> </span>pwr_restore_policy &nbsp;= turn_on<br />
+<span class="Apple-tab-span" style="white-space: pre;"> </span>last_power_event &nbsp; &nbsp;= ACfailed<br />
+<span class="Apple-tab-span" style="white-space: pre;"> </span>chassis_intrusion &nbsp; = inactive<br />
+<span class="Apple-tab-span" style="white-space: pre;"> </span>front_panel_lockout = inactive<br />
+<span class="Apple-tab-span" style="white-space: pre;"> </span>drive_fault &nbsp; &nbsp; &nbsp; &nbsp; = false<br />
+<span class="Apple-tab-span" style="white-space: pre;"> </span>cooling_fan_fault &nbsp; = false<br />
+Power On Hours &nbsp; &nbsp;= 1 hours (0 days)<br />
+BMC LAN Channels &nbsp;= 1 8<br />
+Chan 1 AuthTypes &nbsp;= None MD2 MD5 Straight_Passwd OEM<br />
+ipmiutil health, completed successfully</div>
+[FreeIPMI in Linux]
+<br />
+<div class="freeipmi">
+<b>$ ipmi-raw 0x00 0x06 0x01</b><br />
+rcvd: 01 00 20 01 01 04 02 BF 83 23 00 51 14 56 FF 00 00 <br />
+<b>$ bmc-info</b><br />
+Device ID &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : 32<br />
+Device Revision &nbsp; &nbsp; &nbsp; : 1<br />
+Device SDRs &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : unsupported<br />
+Firmware Revision &nbsp; &nbsp; : 1.04<br />
+Device Available &nbsp; &nbsp; &nbsp;: yes (normal operation)<br />
+IPMI Version &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: 2.0<br />
+Sensor Device &nbsp; &nbsp; &nbsp; &nbsp; : supported<br />
+SDR Repository Device : supported<br />
+SEL Device &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: supported<br />
+FRU Inventory Device &nbsp;: supported<br />
+IPMB Event Receiver &nbsp; : supported<br />
+IPMB Event Generator &nbsp;: supported<br />
+Bridge &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: unsupported<br />
+Chassis Device &nbsp; &nbsp; &nbsp; &nbsp;: supported<br />
+Manufacturer ID &nbsp; &nbsp; &nbsp; : &nbsp;(9091)<br />
+Product ID &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: 5201<br />
+Auxiliary Firmware Revision Information : 0000FF56h<br />
+<br />
+Device GUID : 273242ca-1dd2-1000-03fd-4298fc5b8a44<br />
+<br />
+System GUID : 27315b76-1dd2-1000-03fd-4298fc5b8a44<br />
+<br />
+System Firmware Version &nbsp; &nbsp; &nbsp; : Version1.0<br />
+System Name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : RMManager<br />
+Primary Operating System Name : SUSEServer1.0<br />
+Operating System Name &nbsp; &nbsp; &nbsp; &nbsp; :<br />
+<br />
+Channel Information<br />
+<br />
+Channel Number &nbsp; &nbsp; &nbsp; : 0<br />
+Medium Type &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: IPMB (I2C)<br />
+Protocol Type &nbsp; &nbsp; &nbsp; &nbsp;: IPMB-1.0<br />
+Active Session Count : 0<br />
+Session Support &nbsp; &nbsp; &nbsp;: session-less<br />
+Vendor ID &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: Intelligent Platform Management Interface forum (7154)<br />
+<br />
+Channel Number &nbsp; &nbsp; &nbsp; : 1<br />
+Medium Type &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: 802.3 LAN<br />
+Protocol Type &nbsp; &nbsp; &nbsp; &nbsp;: IPMB-1.0<br />
+Active Session Count : 1<br />
+Session Support &nbsp; &nbsp; &nbsp;: multi-session<br />
+Vendor ID &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: Intelligent Platform Management Interface forum (7154)<br />
+<br />
+Channel Number &nbsp; &nbsp; &nbsp; : 5<br />
+Medium Type &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: System Interface (KCS, SMIC, or BT)<br />
+Protocol Type &nbsp; &nbsp; &nbsp; &nbsp;: KCS<br />
+Active Session Count : 0<br />
+Session Support &nbsp; &nbsp; &nbsp;: session-less<br />
+Vendor ID &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: Intelligent Platform Management Interface forum (7154)<br />
+<br />
+Channel Number &nbsp; &nbsp; &nbsp; : 6<br />
+Medium Type &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: IPMB (I2C)<br />
+Protocol Type &nbsp; &nbsp; &nbsp; &nbsp;: IPMB-1.0<br />
+Active Session Count : 0<br />
+Session Support &nbsp; &nbsp; &nbsp;: session-less<br />
+Vendor ID &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: Intelligent Platform Management Interface forum (7154)<br />
+<b># bmc-info --get-device-id</b><br />
+Device ID &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : 32<br />
+Device Revision &nbsp; &nbsp; &nbsp; : 1<br />
+Device SDRs &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : unsupported<br />
+Firmware Revision &nbsp; &nbsp; : 1.04<br />
+Device Available &nbsp; &nbsp; &nbsp;: yes (normal operation)<br />
+IPMI Version &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: 2.0<br />
+Sensor Device &nbsp; &nbsp; &nbsp; &nbsp; : supported<br />
+SDR Repository Device : supported<br />
+SEL Device &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: supported<br />
+FRU Inventory Device &nbsp;: supported<br />
+IPMB Event Receiver &nbsp; : supported<br />
+IPMB Event Generator &nbsp;: supported<br />
+Bridge &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: unsupported<br />
+Chassis Device &nbsp; &nbsp; &nbsp; &nbsp;: supported<br />
+Manufacturer ID &nbsp; &nbsp; &nbsp; : . (9091)<br />
+Product ID &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: 5201<br />
+Auxiliary Firmware Revision Information : 0000FF56h</div>
+<br />
+<br />
+<b>Cold Reset</b> - NetFn = App (0x06h), CMD = 0x02h, Privilege Level = Admin<br />
+[IPMI tools in Linux]<br />
+[IPMItool]<br />
+<span style="color: blue;">ipmitool raw 0x06 0x02</span><br />
+<span style="color: blue;">ipmitool mc reset cold</span><br />
+[ipmiutil]<br />
+<span style="color: blue;">ipmiutil cmd 00 20 18 02 -V 4</span><br />
+<span style="color: blue;">icmd 00 20 18 02 -V 4</span><br />
+<span style="color: blue;">ipmiutil reset -k</span><br />
+<span style="color: blue;">ireset -k</span><br />
+[FreeIPMI]<br />
+<span style="color: blue;">ipmi-raw 0x00 0x06 0x02</span><br />
+<span style="color: blue;">bmc-device --cold-reset</span><br />
+[IPMI tools under DOS]<br />
+<span style="color: blue;">ipmitool 20 18 02</span><br />
+[ipmiutil]<br />
+<span style="color: blue;">ipmiutil cmd 00 20 18 02 -V 4</span><br />
+<span style="color: blue;">icmd 00 20 18 02 -V 4</span><br />
+<span style="color: blue;">ipmiutil reset -k</span><br />
+<span style="color: blue;">ireset -k</span><br />
+<div>
+<br /></div>
+For example<br />
+[IPMItool in Linux]<br />
+<div class="linux">
+<b>$ ipmitool raw 0x06 0x02</b><br />
+<br />
+<b>$ ipmitool mc reset cold</b><br />
+Sent cold reset command to MC</div>
+[IPMItool under DOS]<br />
+<div class="dos">
+<b>C:&gt;\ipmitool 20 18 02</b><br />
+20 1c 02 00</div>
+[IPMIutil in Linux]
+<br />
+<div class="util">
+<b>$ ipmiutil cmd 00 20 18 02 -V 4</b><br />
+<b>$ icmd 00 20 18 02 -V 4</b><br />
+ipmiutil ver 2.94<br />
+icmd ver 2.94<br />
+This is a test tool to compose IPMI commands.<br />
+Do not use without knowledge of the IPMI specification.<br />
+-- BMC version 1.6, IPMI version 2.0<br />
+send_icmd ret = 0<br />
+ipmiutil cmd, completed successfully<br />
+<b>$ ipmiutil reset -k</b><br />
+<b>$ ireset -k</b><br />
+ipmiutil ver 2.94<br />
+ireset ver 2.94<br />
+-- BMC version 1.6, IPMI version 2.0<br />
+Power State      = 05   (S5: soft off)<br />
+ireset: cold reset ...<br />
+ireset: Cold_Reset ok<br />
+ipmiutil reset, completed successfully
+</div>
+[FreeIPMI in Linux]<br />
+<div class="freeipmi">
+<b>$ ipmi-raw 0x00 0x06 0x02</b><br />
+rcvd: 02 00<br />
+<b>$ bmc-device --cold-reset</b>
+</div>
+<br />
+<br />
+<b>Warm Reset</b>&nbsp;- NetFn = App (0x06h), CMD = 0x03h, Privilege Level = Admin<br />
+[IPMI tools in Linux]<br />
+[IPMItool]<br />
+<span style="color: blue;">ipmitool raw 0x06 0x03</span><br />
+<span style="color: blue;">ipmitool mc reset worm</span><br />
+[ipmiutil]<br />
+<span style="color: blue;">ipmiutil cmd 00 20 18 03 -V 4</span><br />
+<span style="color: blue;">icmd 00 20 18 03 -V 4</span><br />
+[FreeIPMI]<br />
+<span style="color: blue;">ipmi-raw 0x00 0x06 0x03</span><br />
+<span style="color: blue;">bmc-device --warm-reset</span><br />
+<div>
+[IPMI tools under DOS]</div>
+<span style="color: blue;">ipmitool 20 18 03</span><br />
+[ipmiutil]<br />
+<span style="color: blue;">ipmiutil cmd 00 20 18 03 -V 4</span><br />
+<span style="color: blue;">icmd 00 20 18 03 -V 4</span><br />
+<br />
+For example<br />
+[IPMItool in Linux]<br />
+<div class="linux">
+<b>$ ipmitool raw 0x06 0x03</b><br />
+<br />
+<b>$ ipmitool mc reset warm</b><br />
+Sent warm reset command to MC</div>
+[IPMItool under DOS]<br />
+<div class="dos">
+<b>C:&gt;\ipmitool 20 18 03</b><br />
+20 1c 03 00</div>
+[IPMIutil in Linux]<br />
+<div class="util">
+<b>$ ipmiutil cmd 00 20 18 03 -V 4</b><br />
+<b>$ icmd 00 20 18 03 -V 4</b><br />
+ipmiutil ver 2.94<br />
+icmd ver 2.94<br />
+This is a test tool to compose IPMI commands.<br />
+Do not use without knowledge of the IPMI specification.<br />
+-- BMC version 1.6, IPMI version 2.0<br />
+send_icmd ret = 0<br />
+ipmiutil cmd, completed successfully</div>
+[FreeIPMI in Linux]<br />
+<div class="freeipmi">
+<b>$ ipmi-raw 0x00 0x06 0x03</b><br />
+rcvd: 03 00<br />
+<b>$ bmc-device --warm-reset</b>
+</div>
+<br />
+<br />
+<b>Get Self Test Result</b> - NetFn = App (0x06h), CMD = 0x04h, Privilege Level = User<br />
+[IPMI tools in Linux]<br />
+[IPMItool]<br />
+<span style="color: blue;">ipmitool raw 0x06 0x04</span><br />
+<span style="color: blue;">ipmitool mc selftest</span><br />
+[ipmiutil]<br />
+<span style="color: blue;">ipmiutil cmd 00 20 18 04</span><br />
+<span style="color: blue;">icmd 00 20 18 04</span><br />
+<span style="color: blue;">ipmiutil hpm selftestresult</span><br />
+<span style="color: blue;">ihpm selftestresult</span><br />
+[FreeIPMI]<br />
+<span style="color: blue;">ipmi-raw 0x00 0x6 0x04</span><br />
+<span style="color: blue;">bmc-device --get-self-test-result</span><br />
+[IPMI tools under DOS]<br />
+<span style="color: blue;">ipmitool 20 18 04</span><br />
+[ipmiutil]<br />
+<span style="color: blue;">ipmiutil cmd 00 20 18 04</span><br />
+<span style="color: blue;">icmd 00 20 18 04</span><br />
+<br />
+For example<br />
+[IPMItool in Linux]<br />
+No error<br />
+<div class="linux">
+<b>$ ipmitool raw 0x06 0x04</b><br />
+&nbsp;55 00<br />
+<b>$ ipmitool mc selftest</b><br />
+Selftest: passed</div>
+Internal Use Area of BMC FRU corrupted<br />
+<div class="linux">
+<b>$ ipmitool raw 0x06 0x04</b><br />
+&nbsp;57 04</div>
+[IPMIutil in Linux]<br />
+<div class="util">
+<b>$ ipmiutil cmd 00 20 18 04 -V 4</b><br />
+<b>$ icmd 00 20 18 04 -V 4</b><br />
+ipmiutil ver 2.94<br />
+icmd ver 2.94<br />
+This is a test tool to compose IPMI commands.<br />
+Do not use without knowledge of the IPMI specification.<br />
+-- BMC version 1.6, IPMI version 2.0<br />
+respData[len=2]: 55 00<br />
+send_icmd ret = 0<br />
+ipmiutil cmd, completed successfully<br />
+<b>$ ipmiutil hpm selftestresult</b><br />
+<b>$ ihpm selftestresult</b><br />
+ipmiutil ver 2.96<br />
+ihpm ver 1.09<br />
+<br />
+PICMG HPM.1 Upgrade Agent 1.0.9:<br />
+<br />
+Self test results:<br />
+Result1 = 55<br />
+Result2 = 0<br />
+ipmiutil hpm, completed successfully</div>
+[FreeIPMI in Linux]
+<br />
+<div class="freeipmi">
+<b>$ ipmi-raw 0x00 0x06 0x04</b><br />
+rcvd: 04 00 55 00<br />
+<b>$ bmc-device --get-self-test-result</b><br />
+Self Test Result : No Error</div>
+<br />
+<br />
+<b>Manufacturing Test On</b> - NetFn = App (0x06h), CMD = 0x05h, Privilege Level = Admin<br />
+[IPMI tools in Linux]<br />
+[IPMItool]<br />
+<span style="color: blue;">ipmitool raw 0x06 0x05</span><br />
+[ipmiutil]<br />
+<span style="color: blue;">ipmiutil cmd 00 20 18 05 -V 4</span><br />
+<span style="color: blue;">icmd 00 20 18 05 -V 4</span><br />
+[FreeIPMI]<br />
+<span style="color: blue;">ipmi-raw 0x00 0x06 0x05</span><br />
+[IPMI tools under DOS]<br />
+<span style="color: blue;">ipmitool 20 18 05</span><br />
+[ipmiutil]<br />
+<span style="color: blue;">ipmiutil cmd 00 20 18 05 -V 4</span><br />
+<span style="color: blue;">icmd 00 20 18 05 -V 4</span><br />
+<br />
+For example<br />
+[IPMItool in Linux]<br />
+<div class="linux">
+<b>$ ipmitool raw 0x06 0x05</b><br />
+<b><br /></b></div>
+[IPMIutil in Linux]<br />
+<div class="util">
+<b>$ ipmiutil cmd 00 20 18 05 -V 4</b><br />
+<b>$ icmd 00 20 18 05 -V 4</b><br />
+ipmiutil ver 2.94<br />
+icmd ver 2.94<br />
+This is a test tool to compose IPMI commands.<br />
+Do not use without knowledge of the IPMI specification.<br />
+-- BMC version 1.6, IPMI version 2.0<br />
+send_icmd ret = 0<br />
+ipmiutil cmd, completed successfully</div>
+[FreeIPMI in Linux]<br />
+<div class="freeipmi">
+<b>$ ipmi-raw 0x00 0x06 0x05</b><br />
+rcvd: 05 00
+</div>
+<br />
+<br />
+<b>Set ACPI Power State</b> - NetFn = App (0x06h), CMD = 0x06h, Privilege Level = Admin<br />
+[IPMI tools in Linux]<br />
+[IPMItool]<br />
+<span style="color: blue;">ipmitool raw 0x06 0x06 Data[1:2]</span><br />
+[ipmiutil]<br />
+<span style="color: blue;">ipmiutil cmd 00 20 18 06 Data[1:2] -V 4</span><br />
+<span style="color: blue;">icmd 00 20 18 06 Data[1:2] -V 4</span><br />
+[FreeIPMI]<br />
+<span style="color: blue;">ipmi-raw 0x00 0x06 0x06 Data[1:2]</span><br />
+<span style="color: blue;">bmc-device --set-acpi-power-state --set-acpi-system-power-state <SYSTEM_POWER_STATE></span><br />
+<span style="color: blue;">bmc-device --set-acpi-power-state --set-acpi-device-power-state <DEVICE_POWER_STATE></span><br />
+[IPMI tools under DOS]<br />
+<span style="color: blue;">ipmitool 20 18 06 Data[1:2]</span><br />
+[ipmiutil]<br />
+<span style="color: blue;">ipmiutil cmd 00 20 18 06 Data[1:2] -V 4</span><br />
+<span style="color: blue;">icmd 00 20 18 06 Data[1:2] -V 4</span><br />
+<div>
+<br /></div>
+For example<br />
+Set System Power State to S5 and Device Power State to D0<br />
+[IPMItool in Linux]<br />
+<div class="linux">
+<span style="color: #e06666;"><b>$ ipmitool raw 0x06 0x06 0x85 0x80</b></span><br />
+<span style="color: #e06666;"><b><br /></b></span></div>
+[IPMItool under DOS]
+<br />
+<div class="dos">
+<b style="color: #e06666;">C:\&gt;&nbsp;</b><span style="color: #e06666;"><b>ipmitool 20 18 06 85 80</b></span><br />
+<span style="color: #e06666;">1c 06 00</span></div>
+[IPMIutil in Linux]<br />
+<div class="util">
+<b>$ ipmiutil cmd 00 20 18 06 85 80 -V 4</b><br />
+<b>$ icmd 00 20 18 06 85 80 -V 4</b><br />
+ipmiutil ver 2.94<br />
+icmd ver 2.94<br />
+This is a test tool to compose IPMI commands.<br />
+Do not use without knowledge of the IPMI specification.<br />
+-- BMC version 1.6, IPMI version 2.0<br />
+send_icmd ret = 0<br />
+ipmiutil cmd, completed successfully</div>
+[FreeIPMI in Linux]<br />
+<div class="freeipmi">
+<b>$ ipmi-raw 0x00 0x06 0x06 0x83 0x83</b><br />
+rcvd: 06 00<br />
+<b>$ bmc-device --set-acpi-power-state --set-acpi-system-power-state S3</b><br />
+<b>$ bmc-device --set-acpi-power-state --set-acpi-device-power-state d3</b><br />
+<b>$ bmc-device --get-acpi-power-state</b><br />
+ACPI System Power State : S3<br />
+ACPI Device Power State : D3
+</div>
+<br />
+<br />
+<b>Get ACPI Power State</b> - NetFn = App (0x06h), CMD = 0x07h, Privilege Level = User<br />
+[IPMI tools in Linux]<br />
+[IPMItool]<br />
+<span style="color: blue;">ipmitool raw 0x06 0x07</span><br />
+[ipmiutil]<br />
+<span style="color: blue;">ipmiutil cmd 00 20 18 07</span><br />
+<span style="color: blue;">icmd 00 20 18 07</span><br />
+[FreeIPMI]<br />
+<span style="color: blue;">ipmi-raw 0x00 0x06 0x07</span><br />
+<span style="color: blue;">bmc-device --get-acpi-power-state</span><br />
+<div>
+[IPMI tools under DOS]</div>
+<span style="color: blue;">ipmitool 20 18 07</span><br />
+[ipmiutil]<br />
+<span style="color: blue;">ipmiutil cmd 00 20 18 07</span><br />
+<span style="color: blue;">icmd 00 20 18 07</span><br />
+<br />
+For example<br />
+[IPMItool in Linux]<br />
+<div class="linux">
+<span style="color: #e06666;"><b>$ ipmitool raw 0x06 0x07</b></span><br />
+<span style="color: #e06666;">&nbsp;05 00</span></div>
+[IPMItool under DOS]<br />
+<div class="dos">
+<b style="color: #e06666;">C:\&gt;&nbsp;</b><b><span style="color: #e06666;">ipmitool 20 18 07</span></b><br />
+<span style="color: #e06666;">1c 07 00 05 00</span></div>
+[IPMIutil in Linux]<br />
+<div class="util">
+<b>$ ipmiutil cmd 00 20 18 07</b><br />
+<b>$ icmd 00 20 18 07</b><br />
+ipmiutil ver 2.94<br />
+icmd ver 2.94<br />
+This is a test tool to compose IPMI commands.<br />
+Do not use without knowledge of the IPMI specification.<br />
+-- BMC version 1.6, IPMI version 2.0<br />
+respData[len=2]: 05 00<br />
+send_icmd ret = 0<br />
+ipmiutil cmd, completed successfully</div>
+[FreeIPMI in Linux]<br />
+<div class="freeipmi">
+<b>$ ipmi-raw 0x00 0x06 0x07</b><br />
+rcvd: 07 00 03 03<br />
+<b>$ bmc-device --get-acpi-power-state</b><br />
+ACPI System Power State : S3<br />
+ACPI Device Power State : D3<br />
+</div>
+<br />
+<br />
+<b>Get Device GUID</b>&nbsp;- NetFn = App (0x06h), CMD = 0x08h, Privilege Level = User<br />
+[IPMI tools in Linux]<br />
+[IPMItool]<br />
+<span style="color: blue;">ipmitool raw 0x06 0x08</span><br />
+[ipmiutil]<br />
+<span style="color: blue;">ipmiutil cmd 00 20 18 08</span><br />
+<span style="color: blue;">icmd 00 20 18 08</span><br />
+[FreeIPMI]<br />
+<span style="color: blue;">ipmi-raw 0x00 0x06 0x08</span><br />
+<span style="color: blue;">bmc-info --get-device-guid</span><br />
+[IPMI tools under DOS]<br />
+<span style="color: blue;">ipmitool 20 18 08</span><br />
+[ipmiutil]<br />
+<span style="color: blue;">ipmiutil cmd 00 20 18 08</span><br />
+<span style="color: blue;">icmd 00 20 18 08</span><br />
+<br />
+For example<br />
+[IPMItool in Linux]<br />
+<div class="linux">
+<b><span style="color: #e06666;">$ ipmitool raw 0x06 0x08</span></b><br />
+<span style="color: #e06666;">&nbsp;8c 88 a5 15 ac b2 e1 02 00 10 d2 1d 54 b6 62 21</span></div>
+[IPMIutil in Linux]<br />
+<div class="util">
+<b>$ ipmiutil cmd 00 20 18 08</b><br />
+<b>$ icmd 00 20 18 08</b><br />
+ipmiutil ver 2.94<br />
+icmd ver 2.94<br />
+This is a test tool to compose IPMI commands.<br />
+Do not use without knowledge of the IPMI specification.<br />
+-- BMC version 1.6, IPMI version 2.0<br />
+respData[len=16]:&nbsp;8c 88 a5 15 ac b2 e1 02 00 10 d2 1d 54 b6 62 21<br />
+send_icmd ret = 0<br />
+ipmiutil cmd, completed successfully</div>
+[FreeIPMI in Linux]<br />
+<div class="freeipmi">
+<b>$ ipmi-raw 0x00 0x06 0x08</b><br />
+rcvd: 08 00 44 8A 5B FC 98 42 FD 03 00 10 D2 1D CA 42 32 27<br />
+<b>$ bmc-info --get-device-guid</b><br />
+273242ca-1dd2-1000-03fd-4298fc5b8a44<br />
+</div>
+<br />
+<br />
+<div style="text-align: center;">
+Last Updated: 23-02-2018
+</div>
+<br />
+Reference<br />
+[1] "Intelligent Platform Management Interface Specification Second Generation v2.0"<br />
+<span style="background-color: white;">[2]</span><span style="background-color: white; color: #333333; font-size: 14px; line-height: 19px; text-align: justify;"><span style="line-height: 1.4;">&nbsp;"IPMItool"&nbsp;</span></span><span style="color: #0000ee;"><span style="font-size: 14px; line-height: 19.6000003814697px;"><u><a href="http://sourceforge.net/projects/ipmitool/" target="_blank">http://sourceforge.net/projects/ipmitool/</a></u></span></span><br />
+[3] "IPMI Command Test Tool" <a href="http://www.intel.com/design/servers/ipmi/ipmi_tool.htm" target="_blank">http://www.intel.com/design/servers/ipmi/ipmi_tool.htm</a><br />
+[4] "IPMIUTIL USER GUIDE"&nbsp;<a href="http://ipmiutil.sourceforge.net/" target="_blank">http://ipmiutil.sourceforge.net/</a><br />
+[5] "FreeIPMI Documentation"&nbsp;<a href="http://www.gnu.org/software/freeipmi/index.html" target="_blank">http://www.gnu.org/software/freeipmi/index.html</a>
